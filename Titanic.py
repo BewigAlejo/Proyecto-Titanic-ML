@@ -41,3 +41,30 @@ from sklearn.metrics import accuracy_score, classification_report, confusion_mat
 print("Accuracy:", accuracy_score(y_test, y_pred))
 print(classification_report(y_test, y_pred))
 print(confusion_matrix(y_test, y_pred))
+
+accuracy_logistic = accuracy_score(y_test, y_pred)
+
+#Visualización de los datos
+
+def grafico_countplot(df):
+    sns.countplot(x="Sex", hue="Survived", data=df)
+    plt.title("Supervivencia por sexo")
+    plt.show()
+
+def grafico_histplot(df):
+    sns.histplot(data=df, x="Age", hue="Survived", bins=30, kde=True)
+    plt.show()
+
+grafico_countplot(df)
+grafico_histplot(df)
+
+from sklearn.tree import DecisionTreeClassifier
+modelo_tree = DecisionTreeClassifier(random_state=42)
+modelo_tree.fit(X_train, y_train)
+y_pred_tree = modelo_tree.predict(X_test)
+
+from sklearn.metrics import accuracy_score
+print("Accuracy Decision Tree:", accuracy_score(y_test, y_pred_tree))
+
+grafico_countplot(df)
+grafico_histplot(df)
